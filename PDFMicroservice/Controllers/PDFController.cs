@@ -1,12 +1,22 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PDFMicroservice.Data;
 
 namespace PDFMicroservice.Controllers
 {
     public class PDFController : Controller
     {
+
+        private ApplicationDbContext _dbContext;
+
         // GET: PDFController
-        public ActionResult Index()
+        public PDFController(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        // GET: PDFController/Details/
+        public ActionResult Details()
         {
             return View();
         }
@@ -57,12 +67,6 @@ namespace PDFMicroservice.Controllers
             {
                 return View();
             }
-        }
-
-        // GET: PDFController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
         // POST: PDFController/Delete/5
