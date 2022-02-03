@@ -98,30 +98,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Luke\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/Users/gtaylor038/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Luke\\source\\repos\\PDFMicroservice\\PDFMicroservice\\PDFMicroservice.csproj",
+      "projectUniqueName": "/Users/gtaylor038/Documents/PDFMicroservice/PDFMicroservice/PDFMicroservice.csproj",
       "projectName": "PDFMicroservice",
-      "projectPath": "C:\\Users\\Luke\\source\\repos\\PDFMicroservice\\PDFMicroservice\\PDFMicroservice.csproj",
-      "packagesPath": "C:\\Users\\Luke\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Luke\\source\\repos\\PDFMicroservice\\PDFMicroservice\\obj\\",
+      "projectPath": "/Users/gtaylor038/Documents/PDFMicroservice/PDFMicroservice/PDFMicroservice.csproj",
+      "packagesPath": "/Users/gtaylor038/.nuget/packages/",
+      "outputPath": "/Users/gtaylor038/Documents/PDFMicroservice/PDFMicroservice/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Luke\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/gtaylor038/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -163,7 +157,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
       }
     }
   }
