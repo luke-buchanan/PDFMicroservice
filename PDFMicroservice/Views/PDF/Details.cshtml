@@ -6,7 +6,6 @@
 <h1>Create PDF</h1>
 @using (Html.BeginForm("Details", "PDF"))
 {
-    <p class="alert alert-info">All fields are <strong>required</strong></p>
     @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor(m => m.TextInput)

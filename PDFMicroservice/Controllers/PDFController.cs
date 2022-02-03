@@ -64,6 +64,7 @@ namespace PDFMicroservice.Controllers
                 _dbContext.PdfModels.Add(pdf);
                 _dbContext.SaveChanges();
                 GeneratePdf(viewModel.TextInput, nextPdf);
+                TempData["Message"] = "PDF Saved";
                 return RedirectToAction("Details", "PDF");
             }
             else
