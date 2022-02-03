@@ -50,6 +50,8 @@ namespace PDFMicroservice.Controllers
         [HttpPost]
         public ActionResult Details(DetailsFormViewModel viewModel)
         {
+            var lastPdf = _dbContext.PdfModels.Max(p => p.Id);
+            
             var pdf = new PdfModel
             {
                 TextInput = viewModel.TextInput,
@@ -59,11 +61,11 @@ namespace PDFMicroservice.Controllers
             _dbContext.PdfModels.Add(pdf);
             _dbContext.SaveChanges();
             
-            GeneratePdf(viewModel.TextInput);
+            GeneratePdf(viewModel.TextInput, lastPdf);
             return RedirectToAction("Details", "PDF");
         }
 
-        public void GeneratePdf(string text)
+        public void GeneratePdf(string text, int next)
         {
             PdfDocument document = new PdfDocument();
             PdfPage page = document.AddPage();
@@ -73,7 +75,7 @@ namespace PDFMicroservice.Controllers
             gfx.DrawString(text, font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.Center);
 
             // string filename = "pdfGenerator.pdf";
-            document.Save($"{FilePath}12.pdf");
+            document.Save($"{FilePath}{++next}.pdf");
         }
     }
 }
