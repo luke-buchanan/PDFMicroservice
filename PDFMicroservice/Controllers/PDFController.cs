@@ -50,22 +50,41 @@ namespace PDFMicroservice.Controllers
         [HttpPost]
         public ActionResult Details(DetailsFormViewModel viewModel)
         {
-            var lastPdf = _dbContext.PdfModels.Max(p => p.Id);
-            
-            var pdf = new PdfModel
+            var pdfs = _dbContext.PdfModels.Any();
+
+            if (pdfs == false)
             {
-                TextInput = viewModel.TextInput,
-                FilePath = "local-host://8080",
-            };
+                var nextPdf = 1;
+                var pdf = new PdfModel
+                {
+                    TextInput = viewModel.TextInput,
+                    FilePath = $"{FilePath}{nextPdf}.pdf",
+                };
             
-            _dbContext.PdfModels.Add(pdf);
-            _dbContext.SaveChanges();
+                _dbContext.PdfModels.Add(pdf);
+                _dbContext.SaveChanges();
+                GeneratePdf(viewModel.TextInput, nextPdf);
+                return RedirectToAction("Details", "PDF");
+            }
+            else
+            {
+                var lastPdf = _dbContext.PdfModels.Max(p => p.Id);;
+                var nextPdf = lastPdf++;
+                var pdf = new PdfModel
+                {
+                    TextInput = viewModel.TextInput,
+                    FilePath = $"{FilePath}{nextPdf}.pdf",
+                };
             
-            GeneratePdf(viewModel.TextInput, lastPdf);
-            return RedirectToAction("Details", "PDF");
+                _dbContext.PdfModels.Add(pdf);
+                _dbContext.SaveChanges();
+            
+                GeneratePdf(viewModel.TextInput, nextPdf);
+                return RedirectToAction("Details", "PDF");
+            }
         }
 
-        public void GeneratePdf(string text, int next)
+        public void GeneratePdf(string text, int nextPdf)
         {
             PdfDocument document = new PdfDocument();
             PdfPage page = document.AddPage();
@@ -75,7 +94,8 @@ namespace PDFMicroservice.Controllers
             gfx.DrawString(text, font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.Center);
 
             // string filename = "pdfGenerator.pdf";
-            document.Save($"{FilePath}{++next}.pdf");
+            document.Save($"{FilePath}{nextPdf}.pdf");
         }
+        
     }
 }
