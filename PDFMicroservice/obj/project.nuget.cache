@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "NlAxrFH0iiD0WYo/Y4975otQ3YF+HY8kLMME3Ic/qGEeexZN49Mg+X7sKWkHcj0DbS4rNCKEoHwM31MAnZig9A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Luke\\source\\repos\\PDFMicroservice\\PDFMicroservice\\PDFMicroservice.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Luke\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.14.0\\microsoft.visualstudio.azure.containers.tools.targets.1.14.0.nupkg.sha512"
+  ],
+  "logs": []
+}
