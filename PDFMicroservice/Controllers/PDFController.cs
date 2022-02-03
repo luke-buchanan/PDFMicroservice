@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PDFMicroservice.Data;
+using PDFMicroservice.Models;
+using PDFMicroservice.ViewModels;
 
 namespace PDFMicroservice.Controllers
 {
@@ -13,40 +15,41 @@ namespace PDFMicroservice.Controllers
         {
             _dbContext = dbContext;
         }
-
-        // GET: PDFController/Details/
-        public ActionResult Details()
+        
+        [HttpGet]
+        public IActionResult Details()
         {
             return View();
         }
-
-        // POST: PDFController/Create
-        [HttpPost]
-        public ActionResult Create(IFormCollection collection)
+        
+        [HttpGet("/api/{id}")]
+        public IActionResult Details(int id)
         {
-            try
+            var pdf = _dbContext.PdfModels.Find(id);
+            if(pdf == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound("No entry found for this id...");
             }
-            catch
+            else
             {
-                return View();
+                return Ok(pdf);
             }
         }
-
-        // POST: PDFController/Delete/5
+        
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Details(DetailsFormViewModel viewModel)
         {
-            try
+            var pdf = new PdfModel
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                TextInput = viewModel.TextInput,
+                FilePath = "local-host://8080" 
+            };
+            
+            
+            _dbContext.PdfModels.Add(pdf);
+            _dbContext.SaveChanges();
+            
+            return RedirectToAction("Details", "PDF");
         }
     }
 }
