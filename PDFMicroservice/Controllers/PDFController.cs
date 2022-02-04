@@ -2,13 +2,9 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MigraDoc.DocumentObjectModel;
-using MigraDoc.Rendering;
 using PDFMicroservice.Data;
 using PDFMicroservice.Models;
 using PDFMicroservice.ViewModels;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Pdf;
 
