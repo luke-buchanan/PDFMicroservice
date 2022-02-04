@@ -1,11 +1,17 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Specialized;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.Rendering;
 using PDFMicroservice.Data;
 using PDFMicroservice.Models;
 using PDFMicroservice.ViewModels;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Pdf;
+
 
 namespace PDFMicroservice.Controllers
 {
@@ -13,7 +19,7 @@ namespace PDFMicroservice.Controllers
     {
 
         private ApplicationDbContext _dbContext;
-        private readonly string FilePath = "/Users/gtaylor038/Downloads/";
+        private static readonly string FilePath = "/Users/gtaylor038/Downloads/";
         
         public PDFController(ApplicationDbContext dbContext)
         {
@@ -85,18 +91,49 @@ namespace PDFMicroservice.Controllers
             }
         }
 
-        public void GeneratePdf(string text, int nextPdf)
+        static void GeneratePdf(string text, int nextPdf)
         {
             PdfDocument document = new PdfDocument();
             PdfPage page = document.AddPage();
             XGraphics gfx = XGraphics.FromPdfPage(page);
-            XFont font = new XFont("Calibri", 20, XFontStyle.Bold);
+            XFont font = new XFont("Verdana", 12, XFontStyle.Regular);
             
-            gfx.DrawString(text, font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.Center);
-
-            // string filename = "pdfGenerator.pdf";
+            gfx.DrawString(text, font, XBrushes.Black, new XRect(100, 100, page.Width - 200, 300), XStringFormats.Center);
+            // CreatePage(document, text);
             document.Save($"{FilePath}{nextPdf}.pdf");
         }
+
+        // Uses migraDoc which doesnt currently work on Mac
+        // static void CreatePage(PdfDocument document, String text)
+        // {
+        //     PdfPage page = document.AddPage();
+        //     XGraphics gfx = XGraphics.FromPdfPage(page);
+        //     gfx.MUH = PdfFontEncoding.Unicode;
+        //     
+        //     // XFont font = new XFont("Verdana", 12, XFontStyle.Regular);
+        //     //
+        //     // gfx.DrawString(
+        //     //     text, 
+        //     //     font, 
+        //     //     XBrushes.Black, 
+        //     //     new XRect(100, 100, page.Width - 200, 300), XStringFormats.Center
+        //     //     );
+        //
+        //     Document doc = new Document();
+        //     BitVector32.Section sec = doc.AddSection();
+        //
+        //     Paragraph para = sec.AddParagraph();
+        //     para.Format.Alignment = ParagraphAlignment.Justify;
+        //     para.Format.Font.Size = 12;
+        //     para.Format.Font.Color = MigraDoc.DocumentObjectModel.Colors.DarkGray;
+        //     para.AddText(text);
+        //     para.Format.Borders.Distance = "5pt";
+        //     para.Format.Borders.Color = Colors.Gold;
+        //
+        //     MigraDoc.Rendering.DocumentRenderer docRenderer = new DocumentRenderer(doc);
+        //     docRenderer.PrepareDocument();
+        //     docRenderer.RenderObject(gfx, XUnit.FromCentimeter(5), XUnit.FromCentimeter(10), "12cm", para);
+        // }
         
     }
 }
